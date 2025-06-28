@@ -1,1 +1,1 @@
-pub mod grid_config;
+pub mod overworld_config;

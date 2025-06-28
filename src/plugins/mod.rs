@@ -1,2 +1,2 @@
-pub mod grid_plugin;
-pub use grid_plugin::GridPlugin;
+pub mod overworld_startup_plugin;
+pub use overworld_startup_plugin::OverworldPlugin;

@@ -1,1 +1,1 @@
-pub mod grid_tile;
+pub mod overworld_tile;

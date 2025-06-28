@@ -4,8 +4,8 @@ mod prelude {
     pub use bevy::prelude::*; // 0.16
 
     // Widndow
-    pub const VIRTUAL_WIDTH: f32 = 240.0;
-    pub const VIRTUAL_HEIGHT: f32 = 160.0;
+    pub const VIRTUAL_SCREEN_WIDTH: f32 = 240.0;
+    pub const VIRTUAL_SCREEN_HEIGHT: f32 = 160.0;
 
     // Colors
     pub const YELLOW: Color = Color::srgb(1.0, 1.0, 0.0);
@@ -30,7 +30,7 @@ fn main() {
             DefaultPlugins.set(
                 WindowPlugin {
                     primary_window: Some(Window {
-                        resolution: (VIRTUAL_WIDTH, VIRTUAL_HEIGHT).into(),
+                        resolution: (VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT).into(),
                         title: "Basic Window".into(),
                         ..default()
                     }),
@@ -39,15 +39,12 @@ fn main() {
             )
         )
         .add_plugins((
-            plugins::GridPlugin,
-            //plugins::UiPlugin,
-            //plugins::DebugPlugin,
-            //plugins::InputPlugin,
+            plugins::OverworldPlugin,
         ))
         .add_systems(
             Startup, 
             (
-                systems::camera_setup::camera_setup,
+                systems::camera_startup::camera_setup,
             )
         )
         .run();

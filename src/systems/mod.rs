@@ -1,3 +1,2 @@
-pub mod grid;
-
-pub mod camera_setup;
+pub mod overworld_startup;
+pub mod camera_startup;

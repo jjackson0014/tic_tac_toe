@@ -1,6 +1,7 @@
 use crate::prelude::*;
 use crate::components::overworld_tile::OverworldTile;
 use crate::resources::overworld_config::OverworldConfig;
+use crate::components::player::Player;
 
 pub fn spawn_overworld(
     mut commands: Commands,
@@ -19,12 +20,14 @@ pub fn spawn_overworld(
 
     // Spawn Origin Point (Testing)
     commands.spawn((
-        Sprite {
-            color: RED,
-            custom_size: Some(Vec2::splat(1.0)), 
-            ..default()
-        },
-        Transform::from_translation(Vec3::new(0.0, 0.0, 0.0)),
+        // Sprite {
+        //     color: RED,
+        //     custom_size: Some(Vec2::splat(1.0)), 
+        //     ..default()
+        // },
+        Sprite::from_image(asset_server.load("sprites/16x16S.png")),
+        Transform::from_translation(Vec3::new(8.0, 8.0, 2.0)),
+        Player,
     ));
 
     let text_font = TextFont {
@@ -38,7 +41,7 @@ pub fn spawn_overworld(
         for col in 0..overworld_config.cols {
             let x = overworld_start_x + ((col as f32) * overworld_config.tile_size);
             let y = overworld_start_y - ((row as f32) * overworld_config.tile_size);
-            println!("Spawning tile at: ({}, {})", x, y);
+            // println!("Spawning tile at: ({}, {})", x, y);
                 
             // Spawn the tile with its coordinates
             commands.spawn((

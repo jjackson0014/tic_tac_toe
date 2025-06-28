@@ -1,8 +1,8 @@
 use crate::prelude::*;
 
 /// Resource storing the player's current grid position. 
-#[derive(Resource)]
-struct PlayerPosition {
-    x: i32,
-    y: i32,
+#[derive(Resource, Default, Debug)]
+pub struct PlayerPosition {
+    pub x: i32,
+    pub y: i32,
 }

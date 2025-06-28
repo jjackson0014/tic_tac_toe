@@ -47,5 +47,8 @@ fn main() {
                 systems::camera_startup::camera_setup,
             )
         )
+        .add_plugins((
+            plugins::UserInputPlugin,
+        ))
         .run();
 }

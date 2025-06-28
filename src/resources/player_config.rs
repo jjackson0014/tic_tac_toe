@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-/// Resource storing the player's current grid position. 
+// Resource storing the player's current grid position
 #[derive(Resource, Default, Debug)]
 pub struct PlayerPosition {
     pub x: i32,

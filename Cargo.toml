@@ -4,16 +4,21 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+anyhow = "1.0.98"
 bevy = { version = "0.16.0", default-features = false, features = [
         "bevy_winit",
         "bevy_render",
         "bevy_sprite",
         "bevy_text",
         "bevy_asset",
+        "bevy_state",
         "bevy_core_pipeline",
         "webgl2",
-        "png"
+        "png",
 ] }
+bevy_tasks = "0.16.1"
+serde = "1.0.219"
+serde_json = "1.0.140"
 wasm-bindgen = "0.2"
 
 [profile.dev.package."*"]

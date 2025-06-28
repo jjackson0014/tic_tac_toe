@@ -1,9 +1,10 @@
 use bevy::prelude::*;
 
+// This resource holds the player's input for movement and actions
 #[derive(Resource, Default, Debug)]
 pub struct GameInput {
-    pub move_delta: IVec2,
-    pub toggle_scale: bool,
+    pub move_delta: IVec2, // The delta movement vector for the player
+    pub toggle_scale: bool, // Flag to toggle the scale mode
 }
 
 impl GameInput {

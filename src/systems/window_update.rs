@@ -16,7 +16,6 @@ pub fn handle_scale_toggle(
 
         if let Ok(mut proj) = camera_query.single_mut() {
             if let Projection::Orthographic(ref mut ortho) = *proj {
-                //ortho.scaling_mode = ScalingMode::FixedVertical(VIRTUAL_SCREEN_HEIGHT * mode.multiplier);
                 ortho.scaling_mode = bevy::render::camera::ScalingMode::FixedVertical {viewport_height: (VIRTUAL_SCREEN_HEIGHT * mode.multiplier)};
             }
         }

@@ -20,11 +20,6 @@ pub fn spawn_overworld(
 
     // Spawn Origin Point (Testing)
     commands.spawn((
-        // Sprite {
-        //     color: RED,
-        //     custom_size: Some(Vec2::splat(1.0)), 
-        //     ..default()
-        // },
         Sprite::from_image(asset_server.load("sprites/16x16S.png")),
         Transform::from_translation(Vec3::new(8.0, 8.0, 2.0)),
         Player,

@@ -12,7 +12,7 @@ impl Default for OverworldConfig {
         OverworldConfig { 
             rows: ((VIRTUAL_SCREEN_HEIGHT * 4.0) / 16.0) as u32, 
             cols: ((VIRTUAL_SCREEN_WIDTH  * 4.0) / 16.0) as u32, 
-            tile_size: 16.0 
+            tile_size: TILE_SIZE, 
         }
     }
 }

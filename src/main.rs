@@ -3,7 +3,7 @@
 mod prelude {
     pub use bevy::prelude::*; // 0.16
 
-    // Widndow
+    // Window
     pub const VIRTUAL_SCREEN_WIDTH: f32 = 240.0;
     pub const VIRTUAL_SCREEN_HEIGHT: f32 = 160.0;
 
@@ -16,6 +16,9 @@ mod prelude {
     pub const GRAY: Color = Color::srgb(0.75, 0.75,0.75);
     pub const TEAL: Color = Color::srgb(0.39, 1.0, 1.0);
     pub const ORANGE: Color = Color::srgb(0.90, 0.75, 0.16);
+
+    // Overworld
+    pub const TILE_SIZE: f32 = 16.0; // Size of each tile
 }
 mod components;
 mod resources;

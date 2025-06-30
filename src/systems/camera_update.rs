@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use crate::components::player::Player;
+use crate::components::marker::Player;
 
 // This system updates the camera's position to follow the player entity
 // It assumes there is only one Player and one Camera entity in the scene

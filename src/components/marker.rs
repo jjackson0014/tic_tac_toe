@@ -4,3 +4,7 @@ use crate::prelude::*;
 // [TODO]: Consider impact of having multiple players
 #[derive(Component)]
 pub struct Player;
+
+// Opponents
+#[derive(Component)]
+pub struct Opponent;

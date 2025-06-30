@@ -20,12 +20,12 @@ pub fn collect_game_input(
 
     // State/Map input
     if keyboard_input.just_pressed(KeyCode::KeyS) {
-        println!("Pressed S - Loading map: maps/testmapS");
+        // println!("Pressed S - Loading map: maps/testmapS");
         *current_map = LoadedMap("testmapS".to_string());
         next_state.set(GameState::Loading);
     }
     if keyboard_input.just_pressed(KeyCode::KeyM) {
-        println!("Pressed M - Loading map: maps/testmapM");
+        // println!("Pressed M - Loading map: maps/testmapM");
         *current_map = LoadedMap("testmapM".to_string());
         next_state.set(GameState::Loading);
     }

@@ -1,7 +1,7 @@
 use crate::prelude::*;
 use crate::components::{
     overworld_tile::{OverworldTile, OverworldTileType},
-    player::Player,
+    marker::Player,
     clearable_ui::ClearableUI
 };
 use crate::resources::{
@@ -10,6 +10,11 @@ use crate::resources::{
     map_load_request::LoadedMap,
     map_load_request::MapLoadState,
     map_load_request::MapHasLoaded,
+    animation_library::AnimationLibrary,
+};
+use crate::systems::{
+    overworld_animation::spawn_animated_entity_with_idle,
+    overworld_animation::load_character_animations,
 };
 use crate::plugins::{
     TileMapAsset
@@ -22,9 +27,9 @@ pub fn start_map_load(
     asset_server: Res<AssetServer>,
     loaded_map: Res<LoadedMap>,
 ) {
-    println!("Started loading map: {}", format!("maps\\{}.json", loaded_map.0));
+    // println!("Started loading map: {}", format!("maps\\{}.json", loaded_map.0));
     let handle = asset_server.load(format!("maps\\{}.json", loaded_map.0)); // Load the map asset from the AssetServer
-    println!("Map load handle: {:?}", handle);
+    // println!("Map load handle: {:?}", handle);
     map_load_state.handle = Some(handle); // Store the handle in the MapLoadState resource
 }
 
@@ -62,7 +67,7 @@ pub fn despawn_clearable_ui(
 
 // Shows a 'Loading...' text in the center of the screen while the map is loading
 pub fn set_loading_ui(mut commands: Commands, asset_server: Res<AssetServer>) {
-    println!("Setting loading UI...");
+    // println!("Setting loading UI...");
     
     // Load the font asset
     let text_font = TextFont {
@@ -93,10 +98,12 @@ pub fn spawn_overworld_from_json(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     tilemaps: Res<Assets<TileMapAsset>>,
-    current_map: Res<LoadedMap>,
+    // current_map: Res<LoadedMap>,
     map_load_state: Res<MapLoadState>,
     overworld_config: Res<OverworldConfig>,
     mut next_state: ResMut<NextState<GameState>>,
+    mut atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
+    mut animation_library: ResMut<AnimationLibrary>,
     mut map_has_loaded: ResMut<MapHasLoaded>,
 ) {
     // Check if the map has already loaded
@@ -111,12 +118,12 @@ pub fn spawn_overworld_from_json(
     };
     
     // Check if the map is still loading
-    let load_state = asset_server.get_load_state(handle);
-    println!("Map is still loading... Handle... {:?} Current state: {:?}", handle, load_state);
+    // let load_state = asset_server.get_load_state(handle);
+    // println!("Map is still loading... Handle... {:?} Current state: {:?}", handle, load_state);
     
     if let Some(map_asset) = tilemaps.get(handle) {
 
-        println!("Map loaded successfully: {}", current_map.0);
+        // println!("Map loaded successfully: {}", current_map.0);
         
         let tile_size = overworld_config.tile_size;
         let num_rows = map_asset.tiles.len();
@@ -143,11 +150,29 @@ pub fn spawn_overworld_from_json(
 
                 // spawn player at "P"
                 if symbol == "P" {
-                    commands.spawn((
-                        Sprite::from_image(asset_server.load("sprites/16x16S.png")),
-                        Transform::from_translation(Vec3::new(8.0, 8.0, 2.0)),
+                    // commands.spawn((
+                    //     Sprite::from_image(asset_server.load("sprites/player_front_still_ss.png")),
+                    //     Transform::from_translation(Vec3::new(x, y, 2.0)),
+                    //     Player,
+                    // ));
+
+                    spawn_animated_entity_with_idle(
+                        &mut commands,
+                        &asset_server,
+                        &mut atlas_layouts,
+                        &mut animation_library,
                         Player,
-                    ));
+                        "player",
+                        Vec3::new(x,y,2.0),
+                    );
+
+                    load_character_animations(
+                        &mut animation_library, 
+                        &asset_server, 
+                        &mut atlas_layouts, 
+                        "player"
+                    );
+
                     // player_spawned = true;
                 }
 
@@ -166,8 +191,8 @@ pub fn spawn_overworld_from_json(
                     },
                     Transform::from_translation(Vec3::new(x, y, 0.0)),
                     OverworldTile {
-                        tile_world_pixel_coordinates: Vec2::new(x,y),
-                        tile_world_grid_coordinates: Vec2::new(col as f32, row as f32),
+                        tile_world_pixel_coordinates: IVec2::new(x as i32, y as i32),
+                        //tile_world_grid_coordinates: Vec2::new(col as f32, row as f32),
                     },
                     tile_type,
                 ));

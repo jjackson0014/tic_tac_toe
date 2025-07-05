@@ -43,7 +43,7 @@ fn main() {
                 .set(
                     WindowPlugin {
                         primary_window: Some(Window {
-                            resolution: (VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT + DEBUG_UI_HEIGHT).into(),
+                            resolution: (VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT).into(),
                             resizable: false,
                             title: "New Game".into(),
                             ..default()

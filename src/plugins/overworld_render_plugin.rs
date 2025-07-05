@@ -1,9 +1,4 @@
 use crate::prelude::*;
-// use crate::components::{
-//     overworld_tile::OverworldTile,
-//     overworld_tile::OverworldTileType,
-//     player::Player,
-// };
 use crate::resources::{
     overworld_config::OverworldConfig,
     game_states::GameState,
@@ -18,12 +13,6 @@ use crate::systems::overworld_setup::{
     despawn_clearable_ui,
     start_map_load,
     reset_map_flags,
-};
-// use crate::systems::input_update::{
-//     collect_game_input,
-// };
-use crate::systems::game_debugging::{
-    debug_game_state
 };
 use crate::plugins::json_map_loader_plugin::{TileMapAsset, TileMapLoader};
 
@@ -47,7 +36,7 @@ impl Plugin for OverworldPlugin {
                 despawn_clearable_ui, // Clear any UI elements that can be reset
             ).chain()) // Chain the systems to run in sequence when entering the Loading state
             .add_systems(Update, (
-                debug_game_state, // Debugging system to log the current game state
+                //debug_game_state, // Debugging system to log the current game state
                 spawn_overworld_from_json.run_if(in_state(GameState::Loading)), // Spawn the overworld from JSON when in the Loading state
             ));
     }

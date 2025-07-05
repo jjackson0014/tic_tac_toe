@@ -11,6 +11,7 @@ use crate::resources::{
     map_load_request::MapLoadState,
     map_load_request::MapHasLoaded,
     animation_library::AnimationLibrary,
+    player_config::PlayerPosition,
 };
 use crate::systems::{
     overworld_animation::spawn_animated_entity_with_idle,
@@ -105,6 +106,7 @@ pub fn spawn_overworld_from_json(
     mut atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
     mut animation_library: ResMut<AnimationLibrary>,
     mut map_has_loaded: ResMut<MapHasLoaded>,
+    mut player_position: ResMut<PlayerPosition>,
 ) {
     // Check if the map has already loaded
      if map_has_loaded.0 {
@@ -172,6 +174,9 @@ pub fn spawn_overworld_from_json(
                         &mut atlas_layouts, 
                         "player"
                     );
+
+                    player_position.x = x as i32;
+                    player_position.y = y as i32;
 
                     // player_spawned = true;
                 }

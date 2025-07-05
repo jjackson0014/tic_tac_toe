@@ -7,5 +7,6 @@ pub mod player_movement_update;
 pub mod camera_update;
 
 pub mod game_debugging;
+pub mod debug_ui_node;
 
 pub mod overworld_animation;

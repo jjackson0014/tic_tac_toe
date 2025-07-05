@@ -9,6 +9,7 @@ mod prelude {
     // Window
     pub const VIRTUAL_SCREEN_WIDTH: f32 = 240.0;
     pub const VIRTUAL_SCREEN_HEIGHT: f32 = 160.0;
+    pub const DEBUG_UI_HEIGHT: f32 = 40.0;
 
     // Colors
     
@@ -33,6 +34,7 @@ mod plugins;
 
 use prelude::*;
 use crate::resources::game_states::GameState;
+use bevy_diagnostic::FrameTimeDiagnosticsPlugin;
 
 fn main() {
     App::new()
@@ -41,7 +43,8 @@ fn main() {
                 .set(
                     WindowPlugin {
                         primary_window: Some(Window {
-                            resolution: (VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT).into(),
+                            resolution: (VIRTUAL_SCREEN_WIDTH, VIRTUAL_SCREEN_HEIGHT + DEBUG_UI_HEIGHT).into(),
+                            resizable: false,
                             title: "New Game".into(),
                             ..default()
                         }),
@@ -50,12 +53,13 @@ fn main() {
                 )
                 .set(ImagePlugin::default_nearest())
         )
-        //.add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest()))
+        .add_plugins(FrameTimeDiagnosticsPlugin::default())
         .init_state::<GameState>()
         .add_plugins((
             plugins::OverworldPlugin,
             plugins::UserInputPlugin,
             plugins::AnimationPlugin,
+            plugins::UIPlugin,
         ))
         .add_systems(
             Startup, 

@@ -12,3 +12,6 @@ pub use json_map_loader_plugin::{
 
 pub mod animation_plugin;
 pub use animation_plugin::AnimationPlugin;
+
+pub mod ui_plugin;
+pub use ui_plugin::UIPlugin;

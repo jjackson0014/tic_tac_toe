@@ -8,3 +8,10 @@ pub struct Player;
 // Opponents
 #[derive(Component)]
 pub struct Opponent;
+
+// Toggle-able UI Node
+#[derive(Component)]
+pub struct DebugUI;
+
+#[derive(Component)]
+pub struct DebugText;

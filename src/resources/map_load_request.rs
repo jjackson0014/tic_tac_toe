@@ -15,4 +15,3 @@ pub struct LoadedMap(pub String);
 // This resource indicates whether the map has been loaded successfully
 #[derive(Resource, Default)]
 pub struct MapHasLoaded(pub bool);
-
